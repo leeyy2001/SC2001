@@ -1,3 +1,11 @@
+# TODO: Generation of arrays of different lengths, make use of randInt() function
+# TODO: Make new branches for yourselves and edit wherever
+
+# Deliverables:
+    # - Make branches
+    # - For ZJ:
+    #     - fucking start watching lecs from week 1 to 3 you idiot
+
 def insertionSort(arr):
     comparisons = 0
     # Traverse through 1 to len(arr)
