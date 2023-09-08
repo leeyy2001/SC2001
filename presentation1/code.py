@@ -1,10 +1,13 @@
 # TODO: Generation of arrays of different lengths, make use of randInt() function
-# TODO: Make new branches for yourselves and edit wherever
+# Range of arrays should be from 1000 to 10000000
 
-# Deliverables:
-    # - Make branches
-    # - For ZJ:
-    #     - fucking start watching lecs from week 1 to 3 you idiot
+# generate random array of size n
+def generateRandomArray(n):
+    arr = []
+    for i in range(n):
+        arr.append(randint(1,n))
+    return arr
+
 
 def insertionSort(arr):
     comparisons = 0
@@ -84,8 +87,12 @@ def printList(arr):
             
 # [8,4,3,6,1,9,2,4]
 # [8,4,3,6,1,9,2]
-hybridsort_arr = [8,4,3,6,1,9,2,4,10,14,21,66,61,15,77]
-comparisons = hybridsort(hybridsort_arr, 3)
+
+array1 = generateRandomArray(1000)
+array2 = generateRandomArray(10000)
+array3 = generateRandomArray(100000)
+# hybridsort_arr = [8,4,3,6,1,9,2,4,10,14,21,66,61,15,77]
+comparisons = hybridsort(array1, 3)
 print("Hybrid Comparisons: ", comparisons)
 printList(hybridsort_arr)
 print()
