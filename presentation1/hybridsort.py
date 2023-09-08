@@ -1,5 +1,20 @@
+<<<<<<< HEAD:presentation1/hybridsort.py
 import numpy as np
 from insertionsort import insertionSort
+=======
+# TODO: Generation of arrays of different lengths, make use of randInt() function
+# TODO: Make new branches for yourselves and edit wherever
+
+# Deliverables:
+    # - Make branches
+    # - For ZJ:
+    #     - fucking start watching lecs from week 1 to 3 you idiot
+
+def insertionSort(arr):
+    comparisons = 0
+    # Traverse through 1 to len(arr)
+    for i in range(1, len(arr)):
+>>>>>>> 8885aa703849566dc610479ef8b9594312315cf8:presentation1/code.py
 
 # def insertionSort(arr):
 #     comparisons = 0
