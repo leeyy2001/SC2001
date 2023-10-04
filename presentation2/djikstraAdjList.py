@@ -7,6 +7,7 @@ import time
 from statistics import mean
 import matplotlib.pyplot as plt
 from math import comb
+from testDijkstra import Graph
 
 
 class Heap():
@@ -229,21 +230,27 @@ class DijkstraAdjList():
 
 # source = 1
 
-# time_arr_avg = []
+# time_arr_avg_list = []
+# time_arr_avg_matrix = []
 # vertice_arr = []
 
-# bottom_range = 20
-# top_range = 100
+# bottom_range = 10
+# top_range = 30
 
 # for vertices in range(bottom_range, top_range, 1):
 #     vertice_arr.append(vertices)
 
-#     time_arr = []
+#     time_arr_list = []
+#     time_arr_matrix = []
 #     for i in range(100):
 #         # Graph creation
-#         allGraphs = GraphGen(vertices, vertices-1)
+#         allGraphs = GraphGen(vertices, ((vertices**2 - vertices)//2) + 5)
 #         single_graph = allGraphs.generateGraph()
 #         adjList = allGraphs.testCreateAdjList(single_graph)
+#         adjMatrix = allGraphs.testCreateAdjMatrix(single_graph)
+
+#         # print(adjMatrix)
+#         # print(adjList)
 
 #         # Initializes a graph of V number of vertices
 #         graph = DijkstraAdjList(vertices)
@@ -252,62 +259,82 @@ class DijkstraAdjList():
 #             for dest, weight in edge_list:
 #                 graph.addEdge(node-1, dest-1, weight)
 
-#         # djikstra_obj = DijkstraAdjList(vertices)
 #         start = time.perf_counter()
-#         # djikstra_obj.dijkstra(source-1)
 #         graph.dijkstra(source-1)
 #         end = time.perf_counter()
+#         time_arr_list.append(end-start)
 
-#         time_arr.append(end-start)
+#         djikstra_obj = DjikstraAdjMatrix(adjMatrix, vertices)
+#         startM = time.perf_counter()
+#         djikstra_obj.dijkstra(source-1)
+#         endM = time.perf_counter()
+#         time_arr_matrix.append(endM-startM)
 
-#     time_arr_avg.append(mean(time_arr))
+#     time_arr_avg_list.append(mean(time_arr_list))
+#     time_arr_avg_matrix.append(mean(time_arr_matrix))
 
-# plt.plot(vertice_arr, time_arr_avg, label="Dijkstra with Adjacency List")
+# plt.plot(vertice_arr, time_arr_avg_list, label="Dijkstra with Adjacency List")
+# plt.plot(vertice_arr, time_arr_avg_matrix,
+#          label="Dijkstra with Adjacency Matrix")
 # plt.xlabel('Number of Vertices (V)')
 # plt.ylabel('Average CPU Time')
-# plt.title('Edges fixed at V-1, Vertices varied')
+# plt.title('Edges fixed at V(V-1)/2, Vertices varied')
 # plt.grid(True)
 # plt.legend()
 # plt.show()
 
 
-# # The nodes in the algorithm start from 0 and end at V-1
-# source = 1  # You can change this to the desired starting node
-# vertices = 30
+# The nodes in the algorithm start from 0 and end at V-1
+source = 1  # You can change this to the desired starting node
+vertices = 30
 
-# time_arr_avg = []
-# edge_arr = []
+time_arr_avg_list = []
+time_arr_avg_matrix = []
+edge_arr = []
 
-# for edges in range(vertices-1, comb(vertices, 2) + 1):
-#     edge_arr.append(edges)
+for edges in range(vertices-1, comb(vertices, 2) + 1):
+    edge_arr.append(edges)
 
-#     time_arr = []
-#     for i in range(20):
-#         allGraphs = GraphGen(vertices, edges)
-#         graph = allGraphs.generateGraph()
-#         adjList = allGraphs.testCreateAdjList(graph)
+    time_arr_list = []
+    time_arr_matrix = []
+    for i in range(30):
+        allGraphs = GraphGen(vertices, edges)
+        graph = allGraphs.generateGraph()
+        adjList = allGraphs.testCreateAdjList(graph)
+        adjMatrix = allGraphs.testCreateAdjMatrix(graph)
 
-#         # Initializes a graph of V number of vertices
-#         graph = DijkstraAdjList(vertices)
-#         # node and edge minus 1 as the graph is 0 indexed. Thus starting from node 0 to V-1
-#         for node, edge_list in adjList.items():
-#             for dest, weight in edge_list:
-#                 graph.addEdge(node-1, dest-1, weight)
+        # Initializes a graph of V number of vertices
+        graph = DijkstraAdjList(vertices)
+        # graph = Graph(vertices)
+        # node and edge minus 1 as the graph is 0 indexed. Thus starting from node 0 to V-1
+        for node, edge_list in adjList.items():
+            for dest, weight in edge_list:
+                graph.addEdge(node-1, dest-1, weight)
 
-#         djikstra_obj = DijkstraAdjList(vertices)
-#         start = time.perf_counter()
-#         graph.dijkstra(source-1)
-#         end = time.perf_counter()
+        # djikstra_obj = DijkstraAdjList(vertices)
+        start = time.perf_counter()
+        graph.dijkstra(source-1)
+        # graph.shortestPath(source-1)
+        end = time.perf_counter()
 
-#         time_arr.append(end-start)
+        # djikstra_obj = DjikstraAdjMatrix(adjMatrix, vertices)
+        djikstra_obj = Graph(vertices)
+        djikstra_obj.graph = adjMatrix
+        startM = time.perf_counter()
+        djikstra_obj.dijkstra(source-1)
+        endM = time.perf_counter()
 
-#     time_arr_avg.append(mean(time_arr))
+        time_arr_list.append(end-start)
+        time_arr_matrix.append(endM - startM)
 
+    time_arr_avg_list.append(mean(time_arr_list))
+    time_arr_avg_matrix.append(mean(time_arr_matrix))
 
-# plt.plot(edge_arr, time_arr_avg, label="Dijkstra with Adjacency List")
-# plt.xlabel('Number of Edges (E)')
-# plt.ylabel('Average CPU Time')
-# plt.title(f'Edges Varied, Vertices Fixed at {vertices}')
-# plt.grid(True)
-# plt.legend()
-# plt.show()
+plt.plot(edge_arr, time_arr_avg_list, label="Dijkstra with Adjacency List")
+plt.plot(edge_arr, time_arr_avg_matrix, label="Dijkstra with Adjacency Matrix")
+plt.xlabel('Number of Edges (E)')
+plt.ylabel('Average CPU Time')
+plt.title(f'Edges Varied, Vertices Fixed at {vertices}')
+plt.grid(True)
+plt.legend()
+plt.show()

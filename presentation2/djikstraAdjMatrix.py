@@ -105,36 +105,36 @@ class DjikstraAdjMatrix:
 # plt.show()
 
 
-# The nodes in the algorithm start from 0 and end at V-1
-source = 1  # You can change this to the desired starting node
-vertices = 30
+# # The nodes in the algorithm start from 0 and end at V-1
+# source = 1  # You can change this to the desired starting node
+# vertices = 30
 
-time_arr_avg = []
-edge_arr = []
+# time_arr_avg = []
+# edge_arr = []
 
-for edges in range(vertices-1, comb(vertices, 2) + 1):
-    edge_arr.append(edges)
+# for edges in range(vertices-1, comb(vertices, 2) + 1):
+#     edge_arr.append(edges)
 
-    time_arr = []
-    for i in range(20):
-        allGraphs = GraphGen(vertices, edges)
-        graph = allGraphs.generateGraph()
-        adjMatrix = allGraphs.testCreateAdjMatrix(graph)
+#     time_arr = []
+#     for i in range(20):
+#         allGraphs = GraphGen(vertices, edges)
+#         graph = allGraphs.generateGraph()
+#         adjMatrix = allGraphs.testCreateAdjMatrix(graph)
 
-        djikstra_obj = DjikstraAdjMatrix(adjMatrix, vertices)
-        start = time.perf_counter()
-        djikstra_obj.dijkstra(source-1)
-        end = time.perf_counter()
+#         djikstra_obj = DjikstraAdjMatrix(adjMatrix, vertices)
+#         start = time.perf_counter()
+#         djikstra_obj.dijkstra(source-1)
+#         end = time.perf_counter()
 
-        time_arr.append(end-start)
+#         time_arr.append(end-start)
 
-    time_arr_avg.append(mean(time_arr))
+#     time_arr_avg.append(mean(time_arr))
 
 
-plt.plot(edge_arr, time_arr_avg, label="Dijkstra with Adjacency Matrix")
-plt.xlabel('Number of Edges (E)')
-plt.ylabel('Average CPU Time')
-plt.title(f'Edges Varied, Vertices Fixed at {vertices}')
-plt.grid(True)
-plt.legend()
-plt.show()
+# plt.plot(edge_arr, time_arr_avg, label="Dijkstra with Adjacency Matrix")
+# plt.xlabel('Number of Edges (E)')
+# plt.ylabel('Average CPU Time')
+# plt.title(f'Edges Varied, Vertices Fixed at {vertices}')
+# plt.grid(True)
+# plt.legend()
+# plt.show()
