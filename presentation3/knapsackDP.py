@@ -26,7 +26,7 @@ def knapSack(W, wt, val, n):
 # Driver code
 if __name__ == '__main__':
     profit = [7, 6, 9]
-    weight = [5, 6, 8]
+    weight = [4, 6, 8]
     W = 14
     n = len(profit)
     print(knapSack(W, weight, profit, n))
